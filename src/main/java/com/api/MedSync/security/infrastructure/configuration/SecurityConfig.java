@@ -63,8 +63,9 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
                             .requestMatchers("/api/v1/auth/**").permitAll()
-                            .requestMatchers("/api/v1/customer/**").hasAuthority("CUSTOMER")
-                            .requestMatchers("/api/v1/company/**").hasAuthority("COMPANY")
+                            .requestMatchers("/api/v1/heartrates").permitAll()
+                            .requestMatchers("/api/v1/patient/**").hasAuthority("PATIENT")
+                            .requestMatchers("/api/v1/carer/**").hasAuthority("CARER")
                             .anyRequest().authenticated();
                 })
                 .oauth2Login(oauth2Login -> oauth2Login
@@ -82,13 +83,6 @@ public class SecurityConfig {
                 .formLogin(withDefaults());
         return http.build();
     }
-
-//    @Bean
-//    public JwtDecoder jwtDecoder() {
-//        // return JwtDecoders.fromOidcIssuerLocation(AUTH0_DOMAIN);
-//        return NimbusJwtDecoder.withJwkSetUri("https://" + AUTH0_DOMAIN + "/.well-known/jwks.json")
-//                .build();
-//    }
 
     @Bean
     public JwtDecoder jwtDecoder() {
