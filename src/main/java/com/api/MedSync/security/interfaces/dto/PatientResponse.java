@@ -17,4 +17,5 @@ public class PatientResponse {
     private String phoneNumber;
     private String disease;
     private Double weight;
+    private String profilePictureUrl;
 }

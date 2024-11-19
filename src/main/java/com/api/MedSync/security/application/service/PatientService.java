@@ -46,6 +46,27 @@ public class PatientService {
 
         return toPatientResponse(patient);
     }
+    public CarerResponse getCarerByPatientId(Long patientId) {
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found"));
+
+        Carer carer = patient.getCarer();
+        if (carer == null) {
+            throw new RuntimeException("No carer associated with this patient");
+        }
+
+        return toCarerResponse(carer);
+    }
+
+    private CarerResponse toCarerResponse(Carer carer) {
+        return CarerResponse.builder()
+                .id(carer.getId())
+                .name(carer.getName())
+                .lastName(carer.getLastname())
+                .phoneNumber(carer.getPhoneNumber())
+                .profilePictureUrl(carer.getProfilePictureUrl())
+                .build();
+    }
 
     public PatientResponse updatePatient(Long id, UpdatePatientCommand command) {
         Optional<Patient> patientOptional = patientRepository.findById(id);
@@ -60,6 +81,8 @@ public class PatientService {
             throw new RuntimeException("Patient not found");
         }
     }
+
+
 
     public PatientResponse getPatientById(Long id) {
         Patient patient = patientRepository.findById(id)
@@ -82,6 +105,7 @@ public class PatientService {
                 .phoneNumber(patient.getPhoneNumber())
                 .disease(patient.getDisease())
                 .weight(patient.getWeight())
+                .profilePictureUrl(patient.getProfilePictureUrl())
                 .build();
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @OpenAPIDefinition(
-		info = @Info(title = "MedSync API", version = "v1"),
+		info = @Info(title = "MedSync API", version = "v1")/*,
 		servers = {
 				@Server(url = "https://medsync-api.up.railway.app", description = "Railway API Server")
-		}
+		}*/
 )
 @SpringBootApplication
 @EnableScheduling

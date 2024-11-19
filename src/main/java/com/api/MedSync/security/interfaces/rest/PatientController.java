@@ -3,6 +3,7 @@ package com.api.MedSync.security.interfaces.rest;
 import com.api.MedSync.security.application.commands.UpdatePatientCarerCommand;
 import com.api.MedSync.security.application.commands.UpdatePatientCommand;
 import com.api.MedSync.security.application.service.PatientService;
+import com.api.MedSync.security.interfaces.dto.CarerResponse;
 import com.api.MedSync.security.interfaces.dto.PatientResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,10 @@ public class PatientController {
     @PutMapping("/{id}")
     public ResponseEntity<PatientResponse> updatePatient(@PathVariable Long id, @RequestBody UpdatePatientCommand command) {
         return ResponseEntity.ok(patientService.updatePatient(id, command));
+    }
+    @GetMapping("/{id}/carer")
+    public ResponseEntity<CarerResponse> getCarerByPatientId(@PathVariable Long id) {
+        return ResponseEntity.ok(patientService.getCarerByPatientId(id));
     }
 
     @GetMapping("/{id}")
